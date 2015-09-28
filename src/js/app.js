@@ -1,28 +1,22 @@
 /////////////////
 //  Class
 /////////////////
-function Consomation(date,quantity,number){
-  this.date;
-  this.quantity;
-  this.number;
+function Consomation(date,quantity){
+  this.date = date;
+  this.quantity = quantity;
 
   this.getDate = function(){ return this.date; }
   this.setDate = function(date){ this.date = date; }
   this.getQuantity = function(){ return this.quantity; }
   this.setQuantity = function(quantity){ this.quantity = quantity; }
-  this.getNumber = function(){ return this.number; }
-  this.setNumber = function(number){ this.number = number; }
 }
 
-function Aliment(name, resume){
+function Aliment(name, quantity){
   this.name = name;
-  this.resume = resume;
-  this.conso = new Consomation(Date(), 0, 0);
+  this.conso = new Consomation(Date(), quantity);
 
   this.getName = function(){ return this.name; }
   this.setName = function(name){ this.name = name; }
-  this.getResume = function(){ return this.resume; }
-  this.setResume = function(resume){ this.resume = resume; }
   this.getConso = function(){ return this.conso; }
   this.setConso = function(conso){ this.conso = conso; }
 }
@@ -31,18 +25,38 @@ function Aliment(name, resume){
 /////////////////
 
 var $FOOD = $('.container .food');
-var FOOD;
+var FOOD = [];
 
-
+initFood();
 
 function initFood(){
   FOOD = readData("food");
 }
 
+function saveFood(){
+  storeData("food", FOOD);
+}
+
+function addAliment(name, quantity){
+  var aliment = new Aliment(name,quantity);
+  FOOD.push(aliment);
+  saveFood();
+}
+
+/////////////////
+//  html add
+/////////////////
+
+function insertFood(){
+  FOOD;
+}
+
 /////////////////
 //  Event
 /////////////////
-
+$('.addFood').mousedown(function(){
+  document.location = './addFood.html';
+});
 
 /////////////////
 //  localStorage
