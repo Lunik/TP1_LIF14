@@ -24,7 +24,7 @@ function Aliment(name, quantity){
 //  Food
 /////////////////
 
-var $FOOD = $('.container .food');
+var $FOOD = $('.foodContainer');
 var FOOD = [];
 
 initFood();
@@ -48,7 +48,14 @@ function addAliment(name, quantity){
 /////////////////
 
 function insertFood(){
-  FOOD;
+  for(var i=0; i<FOOD.length; ++i){
+    //FOOD[0];
+    $FOOD.append(''+
+      '<div class="aliment">'+
+
+      '</div>'+
+      '');
+  }
 }
 
 /////////////////
