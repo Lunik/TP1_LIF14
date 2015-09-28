@@ -26,6 +26,16 @@ body{
 
 }
 
+.menu a{
+	display: block;
+	margin:  0 auto;
+	text-decoration: none;
+	text-align: center;
+	margin-bottom: -15px;
+	padding-top: 5px;
+
+}
+
 .menu h1{
 	display: block;
 	width: auto;
@@ -53,7 +63,8 @@ h1{
 
 
 .addFood, .foodSubmit{
-	display: inline-block;
+	display: block;
+	margin: 0 auto;
 	width: 100px;
 	height: 30px;
 	background-color: white;
@@ -83,18 +94,15 @@ h1{
 }
 
 .foodInput{
+	display: block;
+	margin: 0 auto;
 	height: 30px;
 	border: 1px solid gray;
 	border-radius: 4px;
+	margin-top: 5px;
 }
 
-.foodContainer label{
-	margin-right: 5px;
-	margin-left: 5px;
-	font-variant: small-caps;
-}
-
-.foodContainer{
+.foodContainer, .foodAdder{
 	display: block;
 	margin: 0 auto;
 	width: 460px;

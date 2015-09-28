@@ -10,12 +10,17 @@
 <body>
   <div class="app">
     <div class="menu">
+      <div class="homelink">
+      <a href="index.html">accueil</a>
+    </div>
       <H1>Ajout aliment</H1>
+
     </div>
     <div class="container">
-      <div class="foodContainer" id="0">
-        <label for="food">Nom de votre aliment:</label>
-        <input list="food" type="input" class="foodInput" />
+      <div class="foodAdder" id="0">
+        <input list="food" type="text" class="foodInput" placeholder="Nom..."/>
+        <input list="food" type="number" class="foodInput" placeholder="Quantité..."/>
+
         <datalist id="food" class="foodList"></datalist>
         <input type="submit" class="foodSubmit" id="0">
       </div>
