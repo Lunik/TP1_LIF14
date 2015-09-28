@@ -80,7 +80,7 @@ $('.addFood').mousedown(function(){
 });
 
 $('.foodSubmit').mousedown(function(){
-  addAliment($('.foodAdder .foodInput').val(), $('.foodAdder .foodqte').val(), new Date());
+  addAliment($('.foodAdder .foodname').val(), $('.foodAdder .foodqte').val(), new Date());
 });
 /////////////////
 //  localStorage
