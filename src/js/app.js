@@ -82,6 +82,7 @@ $('.addFood').mousedown(function(){
 $('.foodSubmit').mousedown(function(){
   console.log()
   addAliment($('.foodAdder input[name=foodname]').val(), $('.foodAdder input[name=foodqte]').val(), new Date());
+  document.location = './index.html';
 });
 /////////////////
 //  localStorage
