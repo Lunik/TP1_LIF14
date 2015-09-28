@@ -36,6 +36,12 @@ body{
 
 }
 
+#homeimg{
+	display: inline-block;
+	height: 20px;
+	width: auto;
+}
+
 .menu h1{
 	display: block;
 	width: auto;
@@ -128,6 +134,8 @@ h1{
 .alimentdate{
 	text-align: right;
 }
+
+
 
 /**
 
