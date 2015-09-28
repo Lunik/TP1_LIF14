@@ -21,7 +21,7 @@ body{
 	vertical-align: top;
 	width: 100%;
 	height: 50px;
-	background-color: #ED9A27;
+	background-color: #EB9809;
 
 }
 
@@ -29,9 +29,9 @@ body{
 	display: block;
 	width: auto;
 	text-align: center;
-	margin-top: 25px;
 	vertical-align: middle;
 	margin: 0 auto;
+	padding-top: 7px;
 }
 
 h1{
@@ -50,8 +50,8 @@ h1{
 }
 
 
-.addFood{
-	display: block;
+.addFood, .foodSubmit{
+	display: inline-block;
 	width: 100px;
 	height: 30px;
 	background-color: white;
@@ -60,7 +60,39 @@ h1{
 	color: gray; 
 	margin-top: 10px;
 }
-.addFood:hover{
+
+.addFood{
+	display: block;
+	margin: 0 auto;
+	width: 130px;
+	height: 40px;
+	margin-top: 30px;
+}
+
+.addFood:hover, .foodSubmit:hover{
 	background-color: #B8B6B3;
 	color:black;
+}
+
+.addFood:active, .foodSubmit:active{
+	background-color: white;
+	color:black;
+}
+
+.foodInput{
+	height: 30px;
+	border: 1px solid grey;
+	border-radius: 4px;
+}
+
+.foodContainer label{
+	margin-right: 5px;
+	margin-left: 5px;
+	font-variant: small-caps;
+}
+
+.foodContainer{
+	display: block;
+	margin: 0 auto;
+	width: 460px;
 }
