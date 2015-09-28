@@ -11,17 +11,17 @@
   <div class="app">
     <div class="menu">
       <div class="homelink">
-      <a href="index.html">accueil</a>
+      <a href="index.html" ><img id="homeimg" src="home.png"></a>
     </div>
       <H1>Ajout aliment</H1>
 
     </div>
     <div class="container">
       <div class="foodAdder" id="0">
-        <input list="food" type="text" class="foodInput" placeholder="Nom..."/>
-        <input list="food" type="number" class="foodInput" placeholder="Quantité..."/>
-
+        <input list="food" type="text" class="foodInput" name="foodname" placeholder="Nom..."/>
         <datalist id="food" class="foodList"></datalist>
+        <input list="food" type="number" name="foodqte" class="foodInput" placeholder="Quantité..."/>
+
         <input type="submit" class="foodSubmit" id="0">
       </div>
     </div>
