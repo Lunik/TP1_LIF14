@@ -5,20 +5,20 @@ function Consomation(date,quantity){
   this.date = date;
   this.quantity = quantity;
 
-  this.getDate = function(){ return this.date; }
-  this.setDate = function(date){ this.date = date; }
-  this.getQuantity = function(){ return this.quantity; }
-  this.setQuantity = function(quantity){ this.quantity = quantity; }
+  this.prototype.getDate = function(){ return this.date; }
+  this.prototype.setDate = function(date){ this.date = date; }
+  this.prototype.getQuantity = function(){ return this.quantity; }
+  this.prototype.setQuantity = function(quantity){ this.quantity = quantity; }
 }
 
 function Aliment(name, quantity){
   this.name = name;
   this.conso = new Consomation(Date(), quantity);
 
-  this.getName = function(){ return this.name; }
-  this.setName = function(name){ this.name = name; }
-  this.getConso = function(){ return this.conso; }
-  this.setConso = function(conso){ this.conso = conso; }
+  this.prototype.getName = function(){ return this.name; }
+  this.prototype.setName = function(name){ this.name = name; }
+  this.prototype.getConso = function(){ return this.conso; }
+  this.prototype.setConso = function(conso){ this.conso = conso; }
 }
 /////////////////
 //  Food
@@ -49,10 +49,13 @@ function addAliment(name, quantity){
 
 function insertFood(){
   for(var i=0; i<FOOD.length; ++i){
-    //FOOD[0];
+    var f = FOOD[0];
+    console.log(f);
     $FOOD.append(''+
       '<div class="aliment">'+
-
+          '<div class="alimentname">'+f.getName()+'</div>'+
+          '<div class="alimentquantity">'+f.conso.getQuantity()+'</div>'+
+          '<div class="alimentdate">'+f.conso.getDate()+'</div>'+
       '</div>'+
       '');
   }
