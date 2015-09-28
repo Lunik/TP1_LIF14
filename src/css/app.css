@@ -113,6 +113,12 @@ h1{
 
 /**
 
-<div class=aliment></div>
+<div class=aliment>
+
+	<div class="alimentname"></div>
+	<div class="alimentquantity"></div>
+	<div class="alimentdate"></div>
+
+</div>
 
 */
