@@ -79,6 +79,9 @@ $('.addFood').mousedown(function(){
   document.location = './addFood.html';
 });
 
+$('.foodSubmit').mousedown(function(){
+  addAliment($('.foodAdder .foodInput').val(), $('.foodAdder .foodqte').val(), new Date());
+});
 /////////////////
 //  localStorage
 /////////////////
