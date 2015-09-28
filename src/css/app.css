@@ -22,12 +22,16 @@ body{
 	width: 100%;
 	height: 50px;
 	background-color: #ED9A27;
-	position:fixed;
- 	top:0px;
+
 }
 
 .menu h1{
+	display: block;
+	width: auto;
+	text-align: center;
+	margin-top: 25px;
 	vertical-align: middle;
+	margin: 0 auto;
 }
 
 h1{
@@ -58,4 +62,5 @@ h1{
 }
 .addFood:hover{
 	background-color: #B8B6B3;
+	color:black;
 }
