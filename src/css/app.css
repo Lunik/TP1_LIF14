@@ -110,3 +110,15 @@ h1{
 	padding: 3px;
 	margin-top: 10px;
 }
+
+/**
+
+<div class=aliment>
+
+	<div class="alimentname"></div>
+	<div class="alimentquantity"></div>
+	<div class="alimentdate"></div>
+
+</div>
+
+*/
