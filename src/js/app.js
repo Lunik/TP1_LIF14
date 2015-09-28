@@ -2,23 +2,26 @@
 //  Class
 /////////////////
 function Consomation(date,quantity){
-  this.date = date;
+  if(date)
+    this.date = date;
+  else
+    this.date = Date();
   this.quantity = quantity;
 
-  this.prototype.getDate = function(){ return this.date; }
-  this.prototype.setDate = function(date){ this.date = date; }
-  this.prototype.getQuantity = function(){ return this.quantity; }
-  this.prototype.setQuantity = function(quantity){ this.quantity = quantity; }
+  this.getDate = function(){ return this.date; }
+  this.setDate = function(date){ this.date = date; }
+  this.getQuantity = function(){ return this.quantity; }
+  this.setQuantity = function(quantity){ this.quantity = quantity; }
 }
 
-function Aliment(name, quantity){
+function Aliment(name, quantity, date){
   this.name = name;
-  this.conso = new Consomation(Date(), quantity);
+  this.conso = new Consomation(date, quantity);
 
-  this.prototype.getName = function(){ return this.name; }
-  this.prototype.setName = function(name){ this.name = name; }
-  this.prototype.getConso = function(){ return this.conso; }
-  this.prototype.setConso = function(conso){ this.conso = conso; }
+  this.getName = function(){ return this.name; }
+  this.setName = function(name){ this.name = name; }
+  this.getConso = function(){ return this.conso; }
+  this.setConso = function(conso){ this.conso = conso; }
 }
 /////////////////
 //  Food
@@ -30,15 +33,24 @@ var FOOD = [];
 initFood();
 
 function initFood(){
-  FOOD = readData("food");
+  var rFood = readData("food");
+  if(rFood){
+    for(var i=0; i<rFood.length; ++i){
+      var f = rFood[i];
+      var aliment = new Aliment(f.name, f.conso.quantity, f.conso.date);
+      FOOD.push(aliment);
+    }
+    insertFood();
+  }
 }
 
 function saveFood(){
   storeData("food", FOOD);
 }
 
-function addAliment(name, quantity){
-  var aliment = new Aliment(name,quantity);
+function addAliment(name, quantity, date){
+  var aliment = new Aliment(name,quantity, date);
+  console.log(aliment);
   FOOD.push(aliment);
   saveFood();
 }
@@ -49,8 +61,7 @@ function addAliment(name, quantity){
 
 function insertFood(){
   for(var i=0; i<FOOD.length; ++i){
-    var f = FOOD[0];
-    console.log(f);
+    var f = FOOD[i];
     $FOOD.append(''+
       '<div class="aliment">'+
           '<div class="alimentname">'+f.getName()+'</div>'+
