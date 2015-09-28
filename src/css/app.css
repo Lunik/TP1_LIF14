@@ -4,14 +4,15 @@ html,body{
 }
 
 *{
-  margin: none;
-  padding: none;
+  margin: none!important;
+  padding: none!important;
 }
 
 body{
   background-color: #FFF;
   font-family: sans-serif;
 }
+
 
 .menu{
 	display: block;
