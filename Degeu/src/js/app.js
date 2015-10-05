@@ -91,13 +91,7 @@ function insertFood(){
 //Click sur le bouton d'ajout de nourriture
 //Switch sur la page du formulaire d'ajout
 $('.addFood').mousedown(function(){
-  var r = confirm("Êtes vous sur de vouloir ajouter un nouveau repas");
-  if (r == true) {
-    var r2 = confirm("Attention !! Avez vous bien mangé aujourd\'hui !?!?");
-    if (r2 == true) {
-      document.location = './addFood.html';    
-    } 
-  }
+  document.location = './addFood.html';
 });
 
 //Click sur le bouton d'ajout de nourriture
@@ -110,7 +104,6 @@ $('.removeFood').mousedown(function(){
 $('.foodSubmit').mousedown(function(){
   var $fname = $('.foodAdder input[name=foodname]');
   var $fqte = $('.foodAdder input[name=foodqte]');
-
   if($fname.val() == ""){
     $fname.css('background-color','yellow');
     $fname.focus();
@@ -125,8 +118,15 @@ $('.foodSubmit').mousedown(function(){
     $fqte.css('background-color','');
   }
   if($fqte.val() != "" && $fname.val() != ""){
-    addAliment($fname.val(), $fqte.val(), new Date());
-    document.location = './index.html';
+    var r = confirm("Êtes vous sur de vouloir ajouter un nouveau repas");
+    if (r == true) {
+      var r2 = confirm("Attention !! Avez vous bien mangé "+$fqte.val()+"(kg) de "+$fname.val()+" aujourd\'hui !?!?");
+      if (r2 == true) {
+
+        addAliment($fname.val(), $fqte.val(), new Date());
+        document.location = './index.html';
+      } 
+    } 
   }
 });
 /////////////////
