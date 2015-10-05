@@ -90,9 +90,26 @@ $('.addFood').mousedown(function(){
 
 //Soumet le formulaire d'ajout d'aliment
 $('.foodSubmit').mousedown(function(){
-  console.log()
-  addAliment($('.foodAdder input[name=foodname]').val(), $('.foodAdder input[name=foodqte]').val(), new Date());
-  document.location = './index.html';
+  var $fname = $('.foodAdder input[name=foodname]');
+  var $fqte = $('.foodAdder input[name=foodqte]');
+
+  if($fname.val() == ""){
+    $fname.css('background-color','red');
+    $fname.focus();
+  } else {
+    $fname.css('background-color','');
+  }
+
+  if($fqte.val() == ""){
+    $fqte.css('background-color','red');
+    $fname.focus();
+  } else {
+    $fqte.css('background-color','');
+  }
+  if($fqte.val() != "" && $fname.val() != ""){
+    addAliment($fname.val(), $fqte.val(), new Date());
+    document.location = './index.html';
+  }
 });
 /////////////////
 //  localStorage
