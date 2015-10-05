@@ -131,7 +131,14 @@ h1{
 .alimentname, .alimentquantity, .alimentdate{
 	display: inline-block;
 	width: 32%;
+	vertical-align: top;
 	text-align: left;
+}
+
+.alimentname{
+	overflow: hidden;
+	height: 4em;
+
 }
 
 .alimentdate{
