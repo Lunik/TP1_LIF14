@@ -32,6 +32,8 @@ var FOOD = [];
 
 initFood();
 
+//Initialisation de la structure de donnée FOOD
+//Recupère les infos depuis le local storage du navigateur
 function initFood(){
   var rFood = readData("food");
   if(rFood){
@@ -44,10 +46,13 @@ function initFood(){
   }
 }
 
+//Sauvegarde de la structure FOOD 
+//dans le local storage du navigateur
 function saveFood(){
   storeData("food", FOOD);
 }
 
+//Ajouter un aliment à la structure FOOD
 function addAliment(name, quantity, date){
   var aliment = new Aliment(name,quantity, date);
   console.log(aliment);
@@ -59,6 +64,7 @@ function addAliment(name, quantity, date){
 //  html add
 /////////////////
 
+//Insertion de la structure FOOD dans le html
 function insertFood(){
   for(var i=0; i<FOOD.length; ++i){
     var f = FOOD[i];
@@ -75,10 +81,14 @@ function insertFood(){
 /////////////////
 //  Event
 /////////////////
+
+//Click sur le bouton d'ajout de nourriture
+//Switch sur la page du formulaire d'ajout
 $('.addFood').mousedown(function(){
   document.location = './addFood.html';
 });
 
+//Soumet le formulaire d'ajout d'aliment
 $('.foodSubmit').mousedown(function(){
   console.log()
   addAliment($('.foodAdder input[name=foodname]').val(), $('.foodAdder input[name=foodqte]').val(), new Date());
