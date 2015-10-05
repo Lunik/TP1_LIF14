@@ -60,6 +60,11 @@ function addAliment(name, quantity, date){
   saveFood();
 }
 
+function removeAliment(index){
+  FOOD.splice(index, 1);
+  saveFood();
+  location.reload();
+}
 /////////////////
 //  html add
 /////////////////
@@ -69,10 +74,11 @@ function insertFood(){
   for(var i=0; i<FOOD.length; ++i){
     var f = FOOD[i];
     $FOOD.append(''+
-      '<div class="aliment">'+
+      '<div class="aliment" id="'+i+'">'+
           '<div class="alimentname">'+f.getName()+'</div>'+
           '<div class="alimentquantity">'+f.conso.getQuantity()+'</div>'+
           '<div class="alimentdate">'+f.conso.getDate()+'</div>'+
+          '<input type="submit" class="removeFood" id="'+i+'" value="x"/>'+
       '</div>'+
       '');
   }
@@ -85,7 +91,19 @@ function insertFood(){
 //Click sur le bouton d'ajout de nourriture
 //Switch sur la page du formulaire d'ajout
 $('.addFood').mousedown(function(){
-  document.location = './addFood.html';
+  var r = confirm("Êtes vous sur de vouloir ajouter un nouveau repas");
+  if (r == true) {
+    var r2 = confirm("Attention !! Avez vous bien mangé aujourd\'hui !?!?");
+    if (r2 == true) {
+      document.location = './addFood.html';    
+    } 
+  }
+});
+
+//Click sur le bouton d'ajout de nourriture
+//Switch sur la page du formulaire d'ajout
+$('.removeFood').mousedown(function(){
+  removeAliment(this.id);
 });
 
 //Soumet le formulaire d'ajout d'aliment
@@ -94,14 +112,14 @@ $('.foodSubmit').mousedown(function(){
   var $fqte = $('.foodAdder input[name=foodqte]');
 
   if($fname.val() == ""){
-    $fname.css('background-color','red');
+    $fname.css('background-color','yellow');
     $fname.focus();
   } else {
     $fname.css('background-color','');
   }
 
   if($fqte.val() == ""){
-    $fqte.css('background-color','red');
+    $fqte.css('background-color','yellow');
     $fname.focus();
   } else {
     $fqte.css('background-color','');
