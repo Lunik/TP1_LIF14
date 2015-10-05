@@ -90,7 +90,7 @@ function insertFood(){
 
 //Click sur le bouton d'ajout de nourriture
 //Switch sur la page du formulaire d'ajout
-$('.addFood').mousedown(function(){
+$('.addFood4').mousedown(function(){
   document.location = './addFood.html';
 });
 
@@ -117,17 +117,44 @@ $('.foodSubmit').mousedown(function(){
   } else {
     $fqte.css('background-color','');
   }
-  if($fqte.val() != "" && $fname.val() != ""){
+  if(true){
     var r = confirm("Êtes vous sur de vouloir ajouter un nouveau repas");
     if (r == true) {
-      var r2 = confirm("Attention !! Avez vous bien mangé "+$fqte.val()+"(kg) de "+$fname.val()+" aujourd\'hui !?!?");
-      if (r2 == true) {
-
-        addAliment($fname.val(), $fqte.val(), new Date());
-        document.location = './index.html';
-      } 
+      while(r2 != "oui"){
+        var r2 = prompt("Attention !! Avez vous bien mangé "+$fqte.val()+"(kg) de "+$fname.val()+" aujourd\'hui !?!? Répondre oui si vous êtes vraiment sur !");
+        if (r2 == "oui") {
+          addAliment($fname.val(), $fqte.val(), new Date());
+          document.location = './index.html';
+        } else {
+          alert("Mauvaise réponse");
+        }
+      }
     } 
   }
+});
+
+$('.aide').mousedown(function(){
+  alert('Aide non disponible... :p');
+});
+
+$('.addFood').mousedown(function(){
+  $('.addFood2').show();
+});
+
+$('.addFood2').mousedown(function(){
+  $('.addFood3').show();
+});
+
+$('.addFood3').mousedown(function(){
+  $('.addFood4').show();
+});
+
+$('.addFood3').mousedown(function(){
+  $('.addFood4').show();
+});
+
+$('.ccouleur').mousedown(function(){
+  randomColor();
 });
 /////////////////
 //  localStorage

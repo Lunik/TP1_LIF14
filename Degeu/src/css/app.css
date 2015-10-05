@@ -42,6 +42,7 @@ body{
 	height: 20px;
 	width: auto;
 	margin-bottom: -5px;
+	text-align: inherit;
 }
 
 .menu h1{
@@ -87,7 +88,7 @@ h1{
 	margin: 0 auto;
 	width: 130px;
 	height: 40px;
-	margin-top: 30px;
+	/*margin-top: 30px;*/
 }
 
 .addFood:hover, .foodSubmit:hover{
@@ -112,10 +113,12 @@ h1{
 
 .foodContainer, .foodAdder{
 	display: block;
-	text-align: right;
-	position: fixed;
-	right: 40px;
+	margin: 0 auto;
 	width: 460px;
+}
+
+.foodInput[name=foodname]{
+	margin-left: 40%;
 }
 
 .aliment{
