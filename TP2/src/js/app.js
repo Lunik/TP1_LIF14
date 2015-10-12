@@ -45,7 +45,7 @@ function Panier () {
 				.append('<td>'+p.id+'</td>')
 				.append('<td>'+p.nom+'</td>')
 				.append('<td>'+p.quantite+'</td>')
-				.append('<td>'+p.getPrixTotal()+'</td>')
+				.append('<td>'+p.getPrixTotal()+' €</td>')
 				.append($buttons);
 			$tbody.append($tr);
 		}	
@@ -74,19 +74,26 @@ function Promo(debut,fin,type,value,min){
 
 	this.applyPromo = function(){
 		var total = 0;
+		var totalPromo = 0;
 		for(var i = 0; i < PANIER.nb; i++){
 			var p = PANIER.produits[i];
 			var prix = p.getPrixTotal();
 			if(p.quantite >= this.minQuantite){
 				if(this.type === '%'){
-					prix -= ((prix * this.value) / 100);
+					var euro = ((prix * this.value) / 100);
+					prix -= euro;
+					totalPromo += euro;
 				} else if(this.type === '-'){
 					prix -= this.value;
+					totalPromo += this.value;
 				}
 			}
 			total += prix;
 		}
-		return Math.floor(total*100)/100;
+		$('.promotionVal').text(Math.floor(totalPromo*100)/100+" €");
+		total = Math.floor(total*100)/100;
+		$('.totalVal').text(total+" €");
+		return total;
 	}
 }
 
@@ -105,6 +112,8 @@ function init(){
 	PANIER.print();
 
 	PROMO = new Promo("01-12-2015","25-12-2015","%",10,1);
+	PROMO.applyPromo();
+	$('.sousTotalVal').text(PANIER.getPrixTotal()+" €");
 
 }
 
@@ -119,9 +128,15 @@ $('body').on('click','.actionB.remove',function(){
 });
 
 $('body').on('click','.actionB.modif',function(){
+	var id = $(this).attr('id');
+	PANIER.produits[id].quantite = prompt('Modifier la quantité de '+PANIER.produits[id].nom, PANIER.produits[id].quantite);
+	PANIER.print();
+});
+
+$('body').on('click','.actionB.ajouter',function(){
 	var pop = new Popup();
-	pop.init(null, null, null, null, "Modification", $html, true);
-	pop.draw();
+	var html = '<button>';
+	pop.init(null,null,null,null,"Ajouter un produit.",html, true);
 });
 
 /////////////////
