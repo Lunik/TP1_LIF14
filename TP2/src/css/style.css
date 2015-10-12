@@ -1,5 +1,6 @@
 html, body{
 	height: 100%;
+	font-family: Helvetica, sans-serif;
 	width: 100%;
 }
 *{
@@ -13,7 +14,7 @@ html, body{
 	margin: 0;
 	padding: 0;
 	width: 100%;
-	font-family: Helvetica sans-serif;
+	font-family: Helvetica, sans-serif;
 }
 
 .header{
@@ -30,7 +31,7 @@ html, body{
 .content{
 	display: block;
 	width: 100%;
-	font-family: Helvetica sans-serif;
+	font-family: Helvetica, sans-serif;
 	margin: 0;
 	padding: 0;
 }
@@ -39,6 +40,7 @@ html, body{
 	display: block;
 	width: 80%;
 	margin: 0 auto;
+	border-collapse: collapse;
 }
 
 thead{
@@ -46,20 +48,20 @@ thead{
 	margin-top: 5px;
 }
 
-th{
+.tabProduit th{
 	border-right: solid black 1px;
 }
 
 .headProduit, .tabProduitBody, .unProduit{
 	display: block;
 	width: 100%;
-	font-family: Helvetica sans-serif;
+	font-family: Helvetica, sans-serif;
 	/*text-align: center;*/
 }
 
 .headProduit tr{
-	display: block;
 	width: 100%;
+	display: table-row;
 }
 
 .unProduit{
@@ -69,11 +71,15 @@ th{
 }
 
 .headProduit th, .unProduit td{
-	display: inline-block;
+	display: table-cell;
 	text-align: center;
 	font-family: Helvetica, sans-serif;
+<<<<<<< HEAD
 	width: 19.5%;
 	min-width: 210px;
+=======
+	padding:.2em 1em .2em .2em;
+>>>>>>> 69fe8fdb3bf287093475582c356414836a980adc
 }
 
 .unProduit:nth-child(odd){
@@ -82,8 +88,8 @@ th{
 
 .actionB{
 	display: inline-block;
-	margin: 0 auto;
-	width: 100px;
+	margin: 0px 2px 0px 2px;
+	padding: 2px;
 	height: 1.8em;
 	background-color: white;
 	border: 2px solid black;
@@ -102,4 +108,24 @@ th{
 	display: block;
 	margin: 0 auto;
 	margin-top: 30px;
+}
+
+.promotionPart{
+	display: block;
+	width: 60%;
+	margin: 0 auto;
+}
+
+.total{
+	display: inline-block;
+}
+
+.tabPromotion{
+	display: inline-block;
+	width: 80%;
+}
+
+.promotionTab{
+	display: block;
+	width: 100%;
 }

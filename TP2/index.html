@@ -68,9 +68,24 @@
   </div>
 
   <div class="promotionPart">
-    <div class="total">Total : </div>
-    <div class="promotion">promotion : </div>
-    <button class="editPromotion">Réductions applicables...</button>
+    <table class="tabPromotion">
+
+     <thead class="promotionTab"> <!-- En-tête du tableau -->
+       <tr>
+           <th class="soustotal">Total</th>
+           <th class="reduction">Total</th>
+           <th class="total">Total après réduction</th>
+        </tr>
+      </thread>
+       <tbody class="tabPromotionBody"> <!-- -->
+       <tr class="trTotal">
+           <td class="sousTotalVal">123456</td>
+           <td class="promotionVal">123456</td>
+           <td class="totalVal">123456</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="actionB editPromotion">Réductions applicables...</button>
   </div>
 
   </div>
@@ -80,6 +95,7 @@
   <div class="js">
     <script type="text/javascript" src="src/js/jquery.js"></script>
     <script type="text/javascript" src="src/js/app.js"></script>
+    <script type="text/javascript" src="src/js/popup.js"></script>
   </div>
 </body>
 
