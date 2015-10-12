@@ -22,6 +22,10 @@ function Panier () {
 		}
 		return total;
 	}
+
+	function print(){
+		
+	}
 }
 
 function Produit (nom, quantite, prix){
@@ -35,5 +39,5 @@ function Produit (nom, quantite, prix){
 }
 
 function Promo(){
-	
+
 }
