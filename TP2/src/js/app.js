@@ -112,11 +112,14 @@ function init(){
 	PANIER.print();
 
 	PROMO = new Promo("01-12-2015","25-12-2015","%",10,1);
-	PROMO.applyPromo();
-	$('.sousTotalVal').text(PANIER.getPrixTotal()+" €");
-
+	reload();
 }
 
+function reload(){
+	PANIER.print();
+	PROMO.applyPromo();
+	$('.sousTotalVal').text(PANIER.getPrixTotal()+" €");
+}
 /////////////////
 //  Event
 /////////////////
@@ -125,18 +128,27 @@ $('body').on('click','.actionB.remove',function(){
 	if(confirm("Confirmer la suppression de "+PANIER.produits[id].quantite+" de "+PANIER.produits[id].nom)){
 		PANIER.removeProduit(id);
 	}
+	reload();
 });
 
 $('body').on('click','.actionB.modif',function(){
 	var id = $(this).attr('id');
 	PANIER.produits[id].quantite = prompt('Modifier la quantité de '+PANIER.produits[id].nom, PANIER.produits[id].quantite);
-	PANIER.print();
+	reload();
 });
 
 $('body').on('click','.actionB.ajouter',function(){
 	var pop = new Popup();
-	var html = '<button>';
-	pop.init(null,null,null,null,"Ajouter un produit.",html, true);
+	var $html = $('<div>');
+	var $nom = $('<select>').append('<option value="Roue">Roue</option>')
+		.append('<option value="Tomate">Tomate</option>')
+		.append('<option value="Chips">Chips</option>');
+	var $quantite = $('<input>').attr('type', 'number');
+	var $valid;
+	$html.append('<label>Nom: </label>').append($nom)
+		.append('<label>Quantite: </label>').append($quantite);
+	pop.init(null,null,null,null,"Ajouter un produit.",$html, true);
+	pop.draw();
 });
 
 /////////////////
