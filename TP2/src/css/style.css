@@ -6,3 +6,10 @@ html, body{
 	padding: 0px;
 	margin: 0px;	
 }
+
+.homeContainer{
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
