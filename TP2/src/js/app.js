@@ -15,13 +15,15 @@ function Panier () {
 			this.produits.push(p);
 			this.nb++;
 		}
+		this.print();
 	}
 
 	this.removeProduit = function(key){
-		if(key && key < this.nb){
+		if(key >= 0 && key < this.nb){
 			this.produits.slice(key,1);
 			this.nb--;
 		}	
+		this.print();
 	}
 
 	this.getPrixTotal = function(){
@@ -36,8 +38,8 @@ function Panier () {
 		$tbody = $('.tabProduitBody').html("");
 		for(var i=0; i < this.nb; i++){
 			var p = this.produits[i];
-			$butModif = $('<button>').addClass('actionB modif').text('Modifier...');
-			$butRemove = $('<button>').addClass('actionB remove').text('Supprimer...');
+			$butModif = $('<button>').addClass('actionB modif').attr('id',i).text('Modifier...');
+			$butRemove = $('<button>').addClass('actionB remove').attr('id',i).text('Supprimer...');
 			$buttons = $('<td>').append($butModif).append($butRemove);
 			$tr = $('<tr>').addClass('unProduit')
 				.append('<td>'+p.id+'</td>')
@@ -103,9 +105,23 @@ function init(){
 	PANIER.print();
 
 	PROMO = new Promo("01-12-2015","25-12-2015","%",10,1);
-	console.log(PROMO.applyPromo());
 
 }
+
+/////////////////
+//  Event
+/////////////////
+$('body').on('click','.actionB.remove',function(){
+	var id = $(this).attr('id');
+	if(confirm("Confirmer la suppression de "+PANIER.produits[id].quantite+" de "+PANIER.produits[id].nom)){
+		PANIER.removeProduit(id);
+	}
+});
+
+$('body').on('click','.actionB.modif',function(){
+
+});
+
 /////////////////
 //  localStorage
 /////////////////
