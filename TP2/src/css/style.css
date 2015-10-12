@@ -73,6 +73,7 @@ th{
 	text-align: center;
 	font-family: Helvetica, sans-serif;
 	width: 19.5%;
+	min-width: 210px;
 }
 
 .unProduit:nth-child(odd){
