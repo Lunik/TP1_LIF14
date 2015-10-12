@@ -1,21 +1,30 @@
 var PANIER = new Panier();
 var PROMO = new Promo();
+init();
+/////////////////
+//  Class
+/////////////////
 
 function Panier () {
 	this.nb = 0;
 	this.produits = [];
+	this.promo = new Promo();
 
-	function addProduit(p){
-		this.produits.push(p);
-		this.nb++;
+	this.addProduit = function (p){
+		if(p){
+			this.produits.push(p);
+			this.nb++;
+		}
 	}
 
-	function removeProduit(key){
-		this.produits.slice(key,1);
-		this.nb--;
+	this.removeProduit = function(key){
+		if(key && key < this.nb){
+			this.produits.slice(key,1);
+			this.nb--;
+		}	
 	}
 
-	function getPrixTotal(){
+	this.getPrixTotal = function(){
 		var total = 0;
 		for (var i = 0; i < this.nb; i++) {
 			total += this.produits[i].getPrixTotal();
@@ -23,21 +32,102 @@ function Panier () {
 		return total;
 	}
 
-	function print(){
-		
+	this.print = function(){
+		$tbody = $('.tabProduitBody').html("");
+		for(var i=0; i < this.nb; i++){
+			var p = this.produits[i];
+			$butModif = $('</button>').addClass('actionB modif').text('Modifier...');
+			$butRemove = $('</button>').addClass('actionB remove').text('Supprimer...');
+			$tr = $('<tr>').append('<td>'+p.id+'</td>')
+				.append('<td>'+p.nom+'</td>')
+				.append('<td>'+p.quantite+'</td>')
+				.append('<td>'+p.getPrixTotal()+'</td>')
+				.append($butModif)
+				.append($butRemove);
+			$tbody.append($tr);
+		}	
 	}
 }
 
-function Produit (nom, quantite, prix){
+function Produit (id, nom, quantite, prix){
+	this.id = id;
 	this.nom = nom;
 	this.quantite = quantite;
 	this.prix = prix;
 
-	function getPrixTotal(){
+	this.getPrixTotal = function(){
 		return this.prix * this.quantite;
 	}
 }
 
-function Promo(){
 
+//Type % ou -
+function Promo(debut,fin,type,value,min){
+	this.debut = debut;
+	this.fin = fin;
+	this.type = type;
+	this.value = value;
+	this.minQuantite = min;
+
+	this.applyPromo = function(){
+		var total = 0;
+		for(var i = 0; i < PANIER.nb; i++){
+			var p = PANIER.produits[i];
+			var prix = p.getPrixTotal();
+			if(p.quantite >= this.minQuantite){
+				if(this.type === '%'){
+					prix -= ((prix * this.value) / 100);
+				} else if(this.type === '-'){
+					prix -= this.value;
+				}
+			}
+			total += prix;
+		}
+		return Math.floor(total*100)/100;
+	}
+}
+
+/////////////////
+//  function
+/////////////////
+
+function init(){
+	var p = new Produit(1, 'Chips', 10, 1);
+	PANIER.addProduit(p);
+	p = new Produit(2, 'Tomate', 1, 2);
+	PANIER.addProduit(p);
+	p = new Produit(3, 'Riz', 2, 0.5);
+	PANIER.addProduit(p);
+
+	PANIER.print();
+
+	PROMO = new Promo("01-12-2015","25-12-2015","%",10,1);
+	console.log(PROMO.applyPromo());
+
+}
+/////////////////
+//  localStorage
+/////////////////
+
+//Sauvgarder des donnes dans le localStorage
+function storeData(key,data){
+	data = JSON.stringify(data);
+	localStorage.setItem(key,data);
+}
+
+//Lire des donnes dans le localStorage
+function readData(key){
+	var data = localStorage.getItem(key);
+	data = JSON.parse(data);
+	return data;
+}
+
+//Effacer le localStorage
+function clearData(){
+	localStorage.clear();
+}
+
+//Affacer un localStorage precis
+function clearKey(key){
+	localStorage.setItem(key,null);
 }
