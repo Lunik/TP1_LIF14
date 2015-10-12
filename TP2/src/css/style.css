@@ -2,6 +2,7 @@ html, body{
 	height: 100%;
 	font-family: Helvetica, sans-serif;
 	width: 100%;
+	background-color: #D6E0EA;
 }
 *{
 	padding: 0px;
@@ -23,10 +24,14 @@ html, body{
 	padding: 0;
 	height: 80px;
 	width: 100%;
-	margin-bottom: 10px;
+	margin-bottom: 40px;
 	text-align: center;
+	background-color: #7696B8;
 }
 
+.header h3{
+	padding-top: 20px;
+}
 
 .content{
 	display: block;
@@ -34,6 +39,7 @@ html, body{
 	font-family: Helvetica, sans-serif;
 	margin: 0;
 	padding: 0;
+	min-width: 800px;
 }
 
 .tabProduit{
@@ -41,6 +47,7 @@ html, body{
 	width: 80%;
 	margin: 0 auto;
 	border-collapse: collapse;
+
 }
 
 thead{
@@ -124,7 +131,7 @@ thead{
 .tabPromotion{
 	display: inline-block;
 	text-align: center;
-	width: 80%;
+	width: 69%;
 }
 
 .tabPromotion th, td{
@@ -137,6 +144,19 @@ thead{
 }
 
 .editPromotion{
+	display: inline-block;
 	margin-top: 10px;
+	width: 25%;
+	min-width: 150px;
 	vertical-align: top;
+}
+
+.editPromotionLabel{
+	display: block;
+}
+
+.editPromotionList{
+	display: block;
+	width: 150px;
+	margin-top: 5px;
 }
