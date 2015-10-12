@@ -36,14 +36,13 @@ function Panier () {
 		$tbody = $('.tabProduitBody').html("");
 		for(var i=0; i < this.nb; i++){
 			var p = this.produits[i];
-			$butModif = $('</button>').addClass('actionB modif').text('Modifier...');
-			$butRemove = $('</button>').addClass('actionB remove').text('Supprimer...');
+			$butModif = $('<button>').addClass('actionB modif').text('Modifier...');
+			$butRemove = $('<button>').addClass('actionB remove').text('Supprimer...');
 			$tr = $('<tr>').append('<td>'+p.id+'</td>')
 				.append('<td>'+p.nom+'</td>')
 				.append('<td>'+p.quantite+'</td>')
 				.append('<td>'+p.getPrixTotal()+'</td>')
-				.append($butModif)
-				.append($butRemove);
+				.append('<td>'+$butModif.html()+$butRemove.html()+'</td>');
 			$tbody.append($tr);
 		}	
 	}
