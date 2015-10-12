@@ -20,10 +20,11 @@
 
      <thead class="headProduit"> <!-- En-tête du tableau -->
        <tr>
-           <th>Id</th>
-           <th>Nom</th>
-           <th>Quantité</th>
-           <th>Action</th>
+           <th class="idProduit">Id</th>
+           <th class="nomProduit">Nom</th>
+           <th class="qteProduit">Quantité</th>
+           <th class="prixProduit">Prix</th>
+           <th class="actionProduit">Action</th>
        </tr>
     </thead>
 
@@ -32,16 +33,37 @@
            <td>123456</td>
            <td>nom1</td>
            <td>12</td>
+           <td>120</td>
            <td>
-           <button class="actionB">Modifier...</button>
-            <button class="actionB">Supprimer</button>
+           <button class="actionB modif">Modifier...</button>
+            <button class="actionB remove">Supprimer</button>
+            </td>
+       </tr>
+       <tr class="unProduit">
+           <td>123456</td>
+           <td>nom1</td>
+           <td>12</td>
+           <td>120</td>
+           <td>
+           <button class="actionB modif">Modifier...</button>
+            <button class="actionB remove">Supprimer</button>
+            </td>
+       </tr>
+       <tr class="unProduit">
+           <td>123456</td>
+           <td>nom1</td>
+           <td>12</td>
+           <td>120</td>
+           <td>
+           <button class="actionB modif">Modifier...</button>
+            <button class="actionB remove">Supprimer</button>
             </td>
        </tr>
     </tbody>
   </table>
 
   <div class="actionBtns">
-    <button class="actionB">Ajouter...</button>
+    <button class="actionB centerB">Ajouter...</button>
     
   </div>
 

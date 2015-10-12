@@ -7,9 +7,98 @@ html, body{
 	margin: 0px;	
 }
 
+
+
 .homeContainer{
 	margin: 0;
 	padding: 0;
 	width: 100%;
+	font-family: Helvetica sans-serif;
 }
 
+.header{
+	display: block;
+	margin: 0;
+	padding: 0;
+	height: 80px;
+	width: 100%;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+
+.content{
+	display: block;
+	width: 100%;
+	font-family: Helvetica sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+.tabProduit{
+	display: block;
+	width: 80%;
+	margin: 0 auto;
+}
+
+thead{
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+th{
+	border-right: solid black 1px;
+}
+
+.headProduit, .tabProduitBody, .unProduit{
+	display: block;
+	width: 100%;
+	font-family: Helvetica sans-serif;
+	/*text-align: center;*/
+}
+
+.headProduit tr{
+	display: block;
+	width: 100%;
+}
+
+.unProduit{
+	height: 2em;
+	line-height: 2em;
+	font-family: Helvetica, sans-serif;
+}
+
+.headProduit th, .unProduit td{
+	display: inline-block;
+	text-align: center;
+	font-family: Helvetica, sans-serif;
+	width: 19.5%;
+}
+
+.unProduit:nth-child(odd){
+	background-color: #9999FF;
+}
+
+.actionB{
+	display: inline-block;
+	margin: 0 auto;
+	width: 100px;
+	height: 1.8em;
+	background-color: white;
+	border: 2px solid black;
+	border-radius: 4px;
+	color: gray;
+	margin-bottom: 2px;
+	cursor: pointer;
+}
+
+.actionB:hover{
+	background-color: #B8B6B3;
+	color:black;
+}
+
+.centerB{
+	display: block;
+	margin: 0 auto;
+	margin-top: 30px;
+}
