@@ -114,6 +114,7 @@ thead{
 	display: block;
 	width: 60%;
 	margin: 0 auto;
+	margin-top: 40px;
 }
 
 .total{
@@ -122,10 +123,20 @@ thead{
 
 .tabPromotion{
 	display: inline-block;
+	text-align: center;
 	width: 80%;
 }
 
-.promotionTab{
+.tabPromotion th, td{
+	width: 180px;
+}
+
+.promotionTab, .tabPromotionBody{
 	display: block;
 	width: 100%;
+}
+
+.editPromotion{
+	margin-top: 10px;
+	vertical-align: top;
 }
