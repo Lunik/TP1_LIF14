@@ -119,7 +119,9 @@ $('body').on('click','.actionB.remove',function(){
 });
 
 $('body').on('click','.actionB.modif',function(){
-
+	var pop = new Popup();
+	pop.init(null, null, null, null, "Modification", $html, true);
+	pop.draw();
 });
 
 /////////////////
