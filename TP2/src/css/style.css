@@ -39,6 +39,7 @@ html, body{
 	display: block;
 	width: 80%;
 	margin: 0 auto;
+	border-collapse: collapse;
 }
 
 thead{
@@ -58,8 +59,8 @@ th{
 }
 
 .headProduit tr{
-	display: block;
 	width: 100%;
+	display: table-row;
 }
 
 .unProduit{
@@ -69,10 +70,10 @@ th{
 }
 
 .headProduit th, .unProduit td{
-	display: inline-block;
+	display: table-cell;
 	text-align: center;
 	font-family: Helvetica, sans-serif;
-	width: 19.5%;
+	padding:.2em 1em .2em .2em;
 }
 
 .unProduit:nth-child(odd){
@@ -81,8 +82,8 @@ th{
 
 .actionB{
 	display: inline-block;
-	margin: 0 auto;
-	width: 100px;
+	margin: 0px 2px 0px 2px;
+	padding: 2px;
 	height: 1.8em;
 	background-color: white;
 	border: 2px solid black;
