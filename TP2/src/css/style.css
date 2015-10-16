@@ -7,6 +7,8 @@ html, body{
 *{
 	padding: 0px;
 	margin: 0px;	
+
+	outline: none;
 }
 
 
@@ -44,7 +46,7 @@ html, body{
 
 .tabProduit{
 	display: block;
-	width: 80%;
+	width: 600px;
 	margin: 0 auto;
 	border-collapse: collapse;
 
@@ -61,14 +63,9 @@ thead{
 
 .headProduit, .tabProduitBody, .unProduit{
 	display: block;
-	width: 100%;
+	/*width: 100%;*/
 	font-family: Helvetica, sans-serif;
 	/*text-align: center;*/
-}
-
-.headProduit tr{
-	width: 100%;
-	display: table-row;
 }
 
 .unProduit{
@@ -78,15 +75,13 @@ thead{
 }
 
 .headProduit th, .unProduit td{
-	display: table-cell;
+	display: inline-block;
 	text-align: center;
 	font-family: Helvetica, sans-serif;
-<<<<<<< HEAD
-	width: 19.5%;
-	min-width: 210px;
-=======
-	padding:.2em 1em .2em .2em;
->>>>>>> 69fe8fdb3bf287093475582c356414836a980adc
+}
+
+td, th{
+	min-width: 100px;
 }
 
 .unProduit:nth-child(odd){
@@ -99,7 +94,7 @@ thead{
 	padding: 2px;
 	height: 1.8em;
 	background-color: white;
-	border: 2px solid black;
+	border: 2px outset grey;
 	border-radius: 4px;
 	color: gray;
 	margin-bottom: 2px;
@@ -109,6 +104,12 @@ thead{
 .actionB:hover{
 	background-color: #B8B6B3;
 	color:black;
+}
+
+.actionB:active{
+	background-color: #B8B6B3;
+	color:black;
+	border: 2px inset grey;
 }
 
 .centerB{
@@ -132,10 +133,6 @@ thead{
 	display: inline-block;
 	text-align: center;
 	width: 69%;
-}
-
-.tabPromotion th, td{
-	width: 180px;
 }
 
 .promotionTab, .tabPromotionBody{

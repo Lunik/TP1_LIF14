@@ -1,3 +1,12 @@
+var PRODUIT = {
+	'Chips': {'nom':'Chips', 'id':1, 'prix': 1},
+	'Tomate': {'nom':'Tomate', 'id':2, 'prix': 2},
+	'Riz': {'nom':'Riz', 'id': 3, 'prix': 0.5}
+}
+var PROMOS = {
+	'1': {'id': '1', 'description': '-10% sur deux produits identiques achetés.', 'type':'%', 'value': 10, 'min': 2 },
+	'2': {'id': '2', 'description': '-5€ sur 5 mêmes articles', 'type':'-', 'value': 5, 'min': 5 }
+}
 var PANIER = new Panier();
 var PROMO = new Promo();
 init();
@@ -65,7 +74,8 @@ function Produit (id, nom, quantite, prix){
 
 
 //Type % ou -
-function Promo(debut,fin,type,value,min){
+function Promo(id, debut,fin,type,value,min){
+	this.id = id;
 	this.debut = debut;
 	this.fin = fin;
 	this.type = type;
@@ -102,16 +112,12 @@ function Promo(debut,fin,type,value,min){
 /////////////////
 
 function init(){
-	var p = new Produit(1, 'Chips', 10, 1);
-	PANIER.addProduit(p);
-	p = new Produit(2, 'Tomate', 1, 2);
-	PANIER.addProduit(p);
-	p = new Produit(3, 'Riz', 2, 0.5);
-	PANIER.addProduit(p);
-
-	PANIER.print();
-
-	PROMO = new Promo("01-12-2015","25-12-2015","%",10,1);
+	$('.editPromotionList').append('<option>Aucune réductions</option>');
+	Object.keys(PROMOS).forEach(function(key) {
+		var p = PROMOS[key];
+  		$('.editPromotionList').append('<option value="'+p.id+'">REDUC n°'+p.id+'\n'+p.description+'</option>');
+	});
+	getPanier();
 	reload();
 }
 
@@ -119,6 +125,22 @@ function reload(){
 	PANIER.print();
 	PROMO.applyPromo();
 	$('.sousTotalVal').text(PANIER.getPrixTotal()+" €");
+	storeData('panier',PANIER);
+	storeData('promo', PROMO);
+}
+
+function getPanier(){
+	var pn = readData('panier');
+	for(var i = 0; i < pn.nb; i++){
+		var p = pn.produits[i];
+		p = new Produit (p.id, p.nom, p.quantite, p.prix);
+		PANIER.addProduit(p);
+	}
+	var promo = readData('promo');
+	PROMO = new Promo(promo.id, promo.debut,promo.fin,promo.type,promo.value,promo.min);
+	$('.editPromotionList').val(promo.id);
+
+	PANIER.promo = PROMO;
 }
 /////////////////
 //  Event
@@ -133,24 +155,50 @@ $('body').on('click','.actionB.remove',function(){
 
 $('body').on('click','.actionB.modif',function(){
 	var id = $(this).attr('id');
-	PANIER.produits[id].quantite = prompt('Modifier la quantité de '+PANIER.produits[id].nom, PANIER.produits[id].quantite);
+	PANIER.produits[id].quantite = prompt('Modifier la quantite de '+PANIER.produits[id].nom, PANIER.produits[id].quantite);
 	reload();
 });
 
 $('body').on('click','.actionB.ajouter',function(){
 	var pop = new Popup();
-	var $html = $('<div>');
-	var $nom = $('<select>').append('<option value="Roue">Roue</option>')
-		.append('<option value="Tomate">Tomate</option>')
-		.append('<option value="Chips">Chips</option>');
-	var $quantite = $('<input>').attr('type', 'number');
-	var $valid;
+	var $html = $('<div class="addProduit">');
+	var $nom = $('<select>');
+	Object.keys(PRODUIT).forEach(function(key) {
+		var p =PRODUIT[key];
+  		$nom.append('<option value="'+p.nom+'">'+p.nom+'</option>');
+	});
+	var $quantite = $('<input>').attr('type', 'number').attr('name','quantite');
+	var $valid = $('<button>').addClass('actionB').text('Valider');
+
 	$html.append('<label>Nom: </label>').append($nom)
-		.append('<label>Quantite: </label>').append($quantite);
+		.append('<label>Quantite: </label>').append($quantite)
+		.append($valid);
 	pop.init(null,null,null,null,"Ajouter un produit.",$html, true);
 	pop.draw();
 });
 
+$('body').on('click','.addProduit .actionB',function(){
+	var produit = $('.addProduit select').val();
+	var quantite = $('.addProduit input[name=quantite]').val();
+	if(quantite <= 0){
+		$('.addProduit input[name=quantite]').css('background-color','red');
+	} else {
+		var p = new Produit(PRODUIT[produit].id, produit, quantite, PRODUIT[produit].prix);
+		PANIER.addProduit(p);
+	}
+	popupClose();
+	reload();
+});
+
+$('body').on('change', '.editPromotionList', function(){
+	var p = PROMOS[$(this).val()];
+	if(p){
+		PROMO = new Promo(p.id, '','',p.type,p.value,p.min);
+	} else {
+		PROMO = new Promo(0);
+	}
+	reload();
+});
 /////////////////
 //  localStorage
 /////////////////
