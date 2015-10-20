@@ -63,7 +63,8 @@ function Panier () {
 
 	this.removeProduit = function(key){
 		if(key >= 0 && key < this.nb){
-			this.produits.slice(key,1);
+			console.log(key);
+			this.produits.splice(key,1);
 			this.nb--;
 		}	
 		this.print();
@@ -232,6 +233,7 @@ function getPanier(){
 /////////////////
 $('body').on('click','.actionB.remove',function(){
 	var id = $(this).attr('id');
+	console.log(id);
 	if(confirm("Confirmer la suppression de "+PANIER.produits[id].quantite+" de "+PANIER.produits[id].nom)){
 		PANIER.removeProduit(id);
 	}
