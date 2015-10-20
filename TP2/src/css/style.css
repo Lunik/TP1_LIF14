@@ -81,7 +81,7 @@ thead{
 }
 
 td, th{
-	min-width: 100px;
+	width: 110px;
 }
 
 .unProduit:nth-child(odd){
