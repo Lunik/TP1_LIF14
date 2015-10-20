@@ -105,6 +105,7 @@ td, th{
 	color: gray;
 	margin-bottom: 2px;
 	cursor: pointer;
+	width: 100px;
 }
 
 .actionB:hover{

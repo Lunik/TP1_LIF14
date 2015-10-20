@@ -12,6 +12,11 @@
     <!-- titre -->
     <div class="header">
       <h3>Dumb market, panier</h3>
+      <script language="javascript">
+      today = new Date();
+      document.write("Le ",today.getDate(),"/",today.getMonth()+1,"/",today.getYear(),"");
+      document.write(" à ",today.getHours(),":",today.getMinutes(),":",today.getSeconds(),"<br />");
+      </script>
     </div>
 
     <!-- affichage reel -->
@@ -22,7 +27,7 @@
        <tr>
            <th class="idProduit">Id</th>
            <th class="nomProduit">Nom</th>
-           <th class="qteProduit">Quantite</th>
+           <th class="qteProduit">Quantité</th>
            <th class="prixProduit">Prix</th>
            <th class="actionProduit">Action</th>
        </tr>
