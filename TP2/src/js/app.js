@@ -165,19 +165,20 @@ $('body').on('click','.actionB.modif',function(){
 
 $('body').on('click','.actionB.ajouter',function(){
 	var pop = new Popup();
-	var $html = $('<div class="addProduit">');
-	var $nom = $('<select>');
+	var $html = $('</br><div class="addProduit">');
+	var $nom = $('<select>').css('width', '170px');
 	Object.keys(PRODUIT).forEach(function(key) {
 		var p =PRODUIT[key];
   		$nom.append('<option value="'+p.nom+'">'+p.nom+'</option>');
 	});
-	var $quantite = $('<input>').attr('type', 'number').attr('name','quantite');
+	var $quantite = $('<input>').attr('type', 'number').attr('name','quantite').css('width', '170px');
 	var $valid = $('<button>').addClass('actionB').text('Valider');
 
-	$html.append('<label>Nom: </label>').append($nom)
-		.append('<label>Quantite: </label>').append($quantite)
-		.append($valid);
-	pop.init(null,null,null,null,"Ajouter un produit.",$html, true);
+	$html.append('<label>&nbspNom: &nbsp &nbsp</label>').append($nom)
+		.append('</br></br><label>Quantité: </label>').append($quantite).append('</br></br>')
+		.append($valid)
+		.append('</br></br>');
+	pop.init(null,null,null,null,"Ajouter un produit",$html, true);
 	pop.draw();
 });
 
