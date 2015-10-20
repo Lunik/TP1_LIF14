@@ -46,7 +46,7 @@ html, body{
 
 .tabProduit{
 	display: block;
-	width: 600px;
+	width: 700px;
 	margin: 0 auto;
 	border-collapse: collapse;
 
@@ -81,7 +81,8 @@ thead{
 }
 
 td, th{
-	width: 110px;
+	width: 125px;
+	padding: 5px;
 }
 
 .unProduit:nth-child(odd){
