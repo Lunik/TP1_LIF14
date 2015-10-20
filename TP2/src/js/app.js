@@ -178,6 +178,7 @@ function init(){
 function reload(){
 	PANIER.print();
 	var tot = PROMO.applyPromo();
+	var refdate = new Date();
 	$('.sousTotalVal').text(PANIER.getPrixTotal()+" €");
 	storeData('panier',PANIER);
 	storeData('promo', PROMO);
@@ -188,7 +189,9 @@ function reload(){
 	if(aproms){
 		for(var i = 0; i < aproms.nb; i++){
 			var promo = aproms.promotions[i];
-			if (tot >= promo.minQuantite){
+			var finda = new Date(promo.fin);
+			var findb = new Date(promo.debut);
+			if (tot >= promo.minQuantite && refdate <= finda && refdate >= findb){
 			var rendate1 = myDateFormatter(promo.debut);
 			var rendate2 = myDateFormatter(promo.fin);
 			$('.editPromotionList').append('<option value="'+promo.id+'">'+promo.id+' - Du '+rendate1+' au '+rendate2+' de '+promo.value+' '+promo.type+' dés '+promo.minQuantite+' € d\'achat </option>');
@@ -349,7 +352,7 @@ $('body').on('click','.addProduit .actionB',function(){
 });
 
 $('body').on('change', '.editPromotionList', function(){
-	console.log(AllPromos.promotions[($(this).val()-1)].type);
+	
 	var p = AllPromos.promotions[($(this).val()-1)];
 	if(p){
 		PROMO = p;
