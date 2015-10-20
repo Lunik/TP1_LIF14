@@ -349,7 +349,7 @@ $('body').on('click','.addProduit .actionB',function(){
 });
 
 $('body').on('change', '.editPromotionList', function(){
-	console.log(AllPromos.promotions[($(this).val()-1)].type);
+	//console.log(AllPromos.promotions[($(this).val()-1)].type);
 	var p = AllPromos.promotions[($(this).val()-1)];
 	if(p){
 		PROMO = p;
