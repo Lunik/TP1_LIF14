@@ -131,16 +131,20 @@ function reload(){
 
 function getPanier(){
 	var pn = readData('panier');
-	for(var i = 0; i < pn.nb; i++){
-		var p = pn.produits[i];
-		p = new Produit (p.id, p.nom, p.quantite, p.prix);
-		PANIER.addProduit(p);
+	if(pn){
+		for(var i = 0; i < pn.nb; i++){
+			var p = pn.produits[i];
+			p = new Produit (p.id, p.nom, p.quantite, p.prix);
+			PANIER.addProduit(p);
+		}
 	}
 	var promo = readData('promo');
-	PROMO = new Promo(promo.id, promo.debut,promo.fin,promo.type,promo.value,promo.min);
-	$('.editPromotionList').val(promo.id);
+	if(promo){
+		PROMO = new Promo(promo.id, promo.debut,promo.fin,promo.type,promo.value,promo.min);
+		$('.editPromotionList').val(promo.id);
 
-	PANIER.promo = PROMO;
+		PANIER.promo = PROMO;
+	}
 }
 /////////////////
 //  Event
