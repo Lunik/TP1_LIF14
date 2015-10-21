@@ -288,7 +288,7 @@ $('body').on('click','.actionB.ajouterReduction',function(){
 	var $html = $('</br><div class="addReduction">');
 	var $debutpromotion = $('<input required>').attr('type', 'date').attr('name','datedebutpromotion').css('width', '170px').attr('id', 'debutPromo').attr('value',mindate);
 	var $finpromotion = $('<input required>').attr('type', 'date').attr('name','datefinpromotion').css('width', '170px').attr('id', 'finPromo').attr('value',mindate);
-	var $typepromotion1 = $('<input checked>').attr('type', 'radio').attr('name','typepromotion').attr('value','promotion').addClass('actionRadio')
+	var $typepromotion1 = $('<input checked style="margin-left: 5px">').attr('type', 'radio').attr('name','typepromotion').attr('value','promotion').addClass('actionRadio')
 		.on('click', function(){
 			$(".reductionField2").hide();
     		$(".reductionField1").show();
@@ -302,7 +302,7 @@ $('body').on('click','.actionB.ajouterReduction',function(){
 	var $valid = $('<button>').addClass('actionB').text('Valider').attr('id', 'addPromo');
 
 	$html.append('<label>&nbspDate début : &nbsp</label>').append($debutpromotion)
-		.append('</br></br><label>&nbspDate fin : &nbsp</label>').append($finpromotion).append('</br></br>')
+		.append('</br></br><label style="margin-left: 23px">&nbspDate fin : &nbsp</label>').append($finpromotion).append('</br></br>')
 		.append($typepromotion1).append('  réduction fixe').append('</br>').append($typepromotion2).append(' pourcentage')
 		.append('</br></br>').append($labelreduc2).append($labelreduc1)
 		.append('</br><label>Minimum d\'achat requis (€): </label>').append($minimum).append('</br></br>')
@@ -391,3 +391,4 @@ function clearData(){
 function clearKey(key){
 	localStorage.setItem(key,null);
 }
+
