@@ -139,7 +139,8 @@ td, th{
 .tabPromotion{
 	display: inline-block;
 	text-align: center;
-	width: 69%;
+	width: 410px;
+	margin-bottom: 20px;
 }
 
 .promotionTab, .tabPromotionBody{
@@ -150,8 +151,8 @@ td, th{
 .editPromotion{
 	display: inline-block;
 	margin-top: 10px;
-	width: 25%;
-	min-width: 150px;
+	margin-left: 20px;
+	width: 210px;
 	vertical-align: top;
 }
 
@@ -161,6 +162,10 @@ td, th{
 
 .editPromotionList{
 	display: block;
-	width: 150px;
+	width: 390px;
 	margin-top: 5px;
+}
+
+.ajouterReduction{
+	width: 210px;
 }

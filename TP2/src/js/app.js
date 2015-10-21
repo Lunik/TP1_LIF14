@@ -9,10 +9,43 @@ var PROMOS = {
 }
 var PANIER = new Panier();
 var PROMO = new Promo();
+var AllPromos = new AllPromos();
 init();
 /////////////////
 //  Class
 /////////////////
+
+
+function myDateFormatter (da) {
+        var d = new Date(da);
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        if (day < 10) {
+            day = "0" + day;
+        }
+        if (month < 10) {
+            month = "0" + month;
+        }
+        var date = day + "/" + month + "/" + year;
+
+        return date;
+    }; 
+
+
+function AllPromos() {
+	this.nb = 0;
+	this.promotions = [];
+
+	this.addPromotion = function (p){
+		if(p){
+			this.promotions.push(p);
+			this.nb++;
+		}
+	}
+
+	}
+
 
 function Panier () {
 	this.nb = 0;
@@ -27,9 +60,11 @@ function Panier () {
 		this.print();
 	}
 
+
 	this.removeProduit = function(key){
 		if(key >= 0 && key < this.nb){
-			this.produits.slice(key,1);
+			console.log(key);
+			this.produits.splice(key,1);
 			this.nb--;
 		}	
 		this.print();
@@ -83,7 +118,7 @@ function Promo(id, debut,fin,type,value,min){
 	this.minQuantite = min;
 
 	this.applyPromo = function(){
-		var total = 0;
+		/*var total = 0;
 		var totalPromo = 0;
 		for(var i = 0; i < PANIER.nb; i++){
 			var p = PANIER.produits[i];
@@ -93,7 +128,7 @@ function Promo(id, debut,fin,type,value,min){
 					var euro = ((prix * this.value) / 100);
 					prix -= euro;
 					totalPromo += euro;
-				} else if(this.type === '-'){
+				} else if(this.type === '€'){
 					prix -= this.value;
 					totalPromo += this.value;
 				}
@@ -103,6 +138,24 @@ function Promo(id, debut,fin,type,value,min){
 		$('.promotionVal').text(Math.floor(totalPromo*100)/100+" €");
 		total = Math.floor(total*100)/100;
 		$('.totalVal').text(total+" €");
+		return total;*/
+		var total = 0;
+		var totalpostreduction = 0;
+		var reduction = 0;
+
+		for(var i = 0; i < PANIER.nb; i++){
+			var p = PANIER.produits[i];
+			var prix = p.getPrixTotal();
+			total+= prix;
+		}
+		if(this.type === '%'){
+			reduction = Math.floor((total/100)*this.value);
+		} else if(this.type === '€'){
+			reduction = this.value;
+		}
+		totalpostreduction = total - reduction;
+		$('.promotionVal').text(reduction + " €");
+		$('.totalVal').text(totalpostreduction+" €");
 		return total;
 	}
 }
@@ -115,7 +168,9 @@ function init(){
 	$('.editPromotionList').append('<option>Aucune réductions</option>');
 	Object.keys(PROMOS).forEach(function(key) {
 		var p = PROMOS[key];
-  		$('.editPromotionList').append('<option value="'+p.id+'">REDUC n°'+p.id+'\n'+p.description+'</option>');
+  		//$('.editPromotionList').append('<option value="'+p.id+'">REDUC n°'+p.id+'\n'+p.description+'</option>');
+  		/*prom = new Promo(p.id, '','',p.type,p.value,p.min);
+  		AllPromos.addPromotion(prom);*/
 	});
 	getPanier();
 	reload();
@@ -123,10 +178,28 @@ function init(){
 
 function reload(){
 	PANIER.print();
-	PROMO.applyPromo();
+	var tot = PROMO.applyPromo();
+	var refdate = new Date();
 	$('.sousTotalVal').text(PANIER.getPrixTotal()+" €");
 	storeData('panier',PANIER);
 	storeData('promo', PROMO);
+	storeData('allpromos', AllPromos);
+	$('.editPromotionList').html(' ');
+	$('.editPromotionList').append('<option>Aucune réductions</option>');
+	var aproms = readData('allpromos');
+	if(aproms){
+		for(var i = 0; i < aproms.nb; i++){
+			var promo = aproms.promotions[i];
+			var finda = new Date(promo.fin);
+			var findb = new Date(promo.debut);
+			if (tot >= promo.minQuantite && refdate <= finda && refdate >= findb){
+			var rendate1 = myDateFormatter(promo.debut);
+			var rendate2 = myDateFormatter(promo.fin);
+			$('.editPromotionList').append('<option value="'+promo.id+'">'+promo.id+' - Du '+rendate1+' au '+rendate2+' de '+promo.value+' '+promo.type+' dés '+promo.minQuantite+' € d\'achat </option>');
+			}
+		}
+		$('.editPromotionList').val(PROMO.id);
+	}
 }
 
 function getPanier(){
@@ -145,12 +218,22 @@ function getPanier(){
 
 		PANIER.promo = PROMO;
 	}
+	var aproms = readData('allpromos');
+	if(aproms){
+		for(var i = 0; i < aproms.nb; i++){
+			var promo = aproms.promotions[i];
+			p = new Promo (promo.id, promo.debut,promo.fin,promo.type,promo.value,promo.minQuantite);
+			//$('.editPromotionList').append('<option value="'+promo.id+'">'+promo.id+' - Du '+promo.debut+' au '+promo.fin+' de '+promo.value+' '+promo.type+' dés '+promo.minQuantite+' € d\'achat </option>');
+			AllPromos.addPromotion(p);
+		}
+	}
 }
 /////////////////
 //  Event
 /////////////////
 $('body').on('click','.actionB.remove',function(){
 	var id = $(this).attr('id');
+	console.log(id);
 	if(confirm("Confirmer la suppression de "+PANIER.produits[id].quantite+" de "+PANIER.produits[id].nom)){
 		PANIER.removeProduit(id);
 	}
@@ -182,6 +265,81 @@ $('body').on('click','.actionB.ajouter',function(){
 	pop.draw();
 });
 
+
+
+$('body').on('click','.actionB.ajouterReduction',function(){
+	var pop = new Popup();
+	var today = new Date();
+	var dd = today.getDate();
+    var mm = today.getMonth()+1;
+    if(dd<10){
+        dd='0'+dd
+    } 
+    if(mm<10){
+        mm='0'+mm
+    } 
+	var mindate = (''+today.getFullYear()+'-'+mm+'-'+dd);
+	console.log(mindate);
+	var $reduction = $('<input>').attr('type', 'number').attr('name','reductionPourcentage').css('width', '170px').val(0);
+	var $reduction1 = $('<input>').attr('type', 'number').attr('name','reductionFixe').css('width', '170px').val(0);
+	var $labelreduc1 = $('<div class="reductionField1" ><label>Réduction (€): </label>').append($reduction1).append('</div>');
+	var $labelreduc2 = $('<div class="reductionField2" ><label>Réduction (%): </label>').append($reduction).append('</div>');
+	var $html = $('</br><div class="addReduction">');
+	var $debutpromotion = $('<input required>').attr('type', 'date').attr('name','datedebutpromotion').css('width', '170px').attr('id', 'debutPromo').attr('value',mindate);
+	var $finpromotion = $('<input required>').attr('type', 'date').attr('name','datefinpromotion').css('width', '170px').attr('id', 'finPromo').attr('value',mindate);
+	var $typepromotion1 = $('<input checked>').attr('type', 'radio').attr('name','typepromotion').attr('value','promotion').addClass('actionRadio')
+		.on('click', function(){
+			$(".reductionField2").hide();
+    		$(".reductionField1").show();
+		});
+	var $typepromotion2 = $('<input>').attr('type', 'radio').attr('name','typepromotion').attr('value','pourcentage').addClass('actionRadio')
+		.on('click', function(){
+			$(".reductionField1").hide();
+    		$(".reductionField2").show();
+		});
+	var $minimum = $('<input required>').attr('type', 'number').attr('name','minimum').css('width', '170px').attr('id', 'minimumPromo').val(0);
+	var $valid = $('<button>').addClass('actionB').text('Valider').attr('id', 'addPromo');
+
+	$html.append('<label>&nbspDate début : &nbsp</label>').append($debutpromotion)
+		.append('</br></br><label>&nbspDate fin : &nbsp</label>').append($finpromotion).append('</br></br>')
+		.append($typepromotion1).append('  réduction fixe').append('</br>').append($typepromotion2).append(' pourcentage')
+		.append('</br></br>').append($labelreduc2).append($labelreduc1)
+		.append('</br><label>Minimum d\'achat requis (€): </label>').append($minimum).append('</br></br>')
+		.append($valid)
+		.append('</br></br>');
+	pop.init(null,null,null,null,"Ajouter une promotion",$html, true);
+	pop.draw();
+	$(".reductionField2").hide();
+});
+
+
+$('body').on('click', '#addPromo',function(){
+	var datedebut = $(".addReduction input[name=datedebutpromotion]").val();
+	var datefin = $(".addReduction input[name=datefinpromotion]").val();
+	var minimum = $(".addReduction input[name=minimum]").val();
+	var type;
+	var valreduction;
+	var reduction = $('input[name=typepromotion]:checked', '.addReduction').val();
+	if (reduction == 'promotion'){
+		console.log("reduc normale");
+		type ='€';
+		valreduction = $(".addReduction input[name=reductionFixe]").val();
+	}else{
+		console.log("reduc %");
+		type ='%';
+		valreduction = $(".addReduction input[name=reductionPourcentage]").val();
+	}
+
+	var red = new Promo((AllPromos.nb+1), datedebut, datefin, type, valreduction, minimum);
+	console.log(datefin);
+	console.log(minimum);
+	AllPromos.addPromotion(red);
+
+	popupClose();
+	reload();
+
+});
+
 $('body').on('click','.addProduit .actionB',function(){
 	var produit = $('.addProduit select').val();
 	var quantite = $('.addProduit input[name=quantite]').val();
@@ -196,13 +354,16 @@ $('body').on('click','.addProduit .actionB',function(){
 });
 
 $('body').on('change', '.editPromotionList', function(){
-	var p = PROMOS[$(this).val()];
+	
+	var p = AllPromos.promotions[($(this).val()-1)];
 	if(p){
-		PROMO = new Promo(p.id, '','',p.type,p.value,p.min);
+		PROMO = p;
 	} else {
 		PROMO = new Promo(0);
 	}
-	reload();
+	PROMO.applyPromo();
+	storeData('promo', PROMO);
+	//reload();
 });
 /////////////////
 //  localStorage

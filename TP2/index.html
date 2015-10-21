@@ -15,7 +15,7 @@
       <h3>Dumb market, panier</h3>
       <script language="javascript">
       today = new Date();
-      document.write("Le ",today.getDate(),"/",today.getMonth()+1,"/",today.getYear(),"");
+      document.write("Le ",today.getDate(),"/",today.getMonth()+1,"/",today.getFullYear(),"");
       document.write(" à ",today.getHours(),":",today.getMinutes(),":",today.getSeconds(),"<br />");
       </script>
     </div>
@@ -49,7 +49,8 @@
     <button class="actionB centerB ajouter">Ajouter...</button>
     
   </div>
-
+  </br>
+  <hr>
   <div class="promotionPart">
     <table class="tabPromotion">
 
@@ -69,8 +70,9 @@
       </tbody>
     </table>
     <div class="editPromotion">
-      <label class="editPromotionLabel">Réductions applicables </label>
+      <label class="editPromotionLabel">Réductions applicables :</label>
       <select class="actionB editPromotionList"></select>
+      <button class="actionB centerB ajouterReduction">Nouvelle promotion...</button>
     </div>
   </div>
 
