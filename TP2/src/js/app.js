@@ -63,7 +63,8 @@ function Panier () {
 
 	this.removeProduit = function(key){
 		if(key >= 0 && key < this.nb){
-			this.produits.slice(key,1);
+			console.log(key);
+			this.produits.splice(key,1);
 			this.nb--;
 		}	
 		this.print();
@@ -178,6 +179,7 @@ function init(){
 function reload(){
 	PANIER.print();
 	var tot = PROMO.applyPromo();
+	var refdate = new Date();
 	$('.sousTotalVal').text(PANIER.getPrixTotal()+" €");
 	storeData('panier',PANIER);
 	storeData('promo', PROMO);
@@ -188,7 +190,9 @@ function reload(){
 	if(aproms){
 		for(var i = 0; i < aproms.nb; i++){
 			var promo = aproms.promotions[i];
-			if (tot >= promo.minQuantite){
+			var finda = new Date(promo.fin);
+			var findb = new Date(promo.debut);
+			if (tot >= promo.minQuantite && refdate <= finda && refdate >= findb){
 			var rendate1 = myDateFormatter(promo.debut);
 			var rendate2 = myDateFormatter(promo.fin);
 			$('.editPromotionList').append('<option value="'+promo.id+'">'+promo.id+' - Du '+rendate1+' au '+rendate2+' de '+promo.value+' '+promo.type+' dés '+promo.minQuantite+' € d\'achat </option>');
@@ -229,6 +233,7 @@ function getPanier(){
 /////////////////
 $('body').on('click','.actionB.remove',function(){
 	var id = $(this).attr('id');
+	console.log(id);
 	if(confirm("Confirmer la suppression de "+PANIER.produits[id].quantite+" de "+PANIER.produits[id].nom)){
 		PANIER.removeProduit(id);
 	}
@@ -349,7 +354,11 @@ $('body').on('click','.addProduit .actionB',function(){
 });
 
 $('body').on('change', '.editPromotionList', function(){
+<<<<<<< HEAD
 	//console.log(AllPromos.promotions[($(this).val()-1)].type);
+=======
+	
+>>>>>>> 3f90212aa9e462b333dee56f3e412a98b8195106
 	var p = AllPromos.promotions[($(this).val()-1)];
 	if(p){
 		PROMO = p;
