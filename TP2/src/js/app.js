@@ -192,11 +192,12 @@ function reload(){
 			var promo = aproms.promotions[i];
 			var finda = new Date(promo.fin);
 			var findb = new Date(promo.debut);
-			if (tot >= promo.minQuantite && refdate <= finda && refdate >= findb){
+			//if (tot >= promo.minQuantite && refdate <= finda && refdate >= findb){
+				console.log("coucou");
 			var rendate1 = myDateFormatter(promo.debut);
 			var rendate2 = myDateFormatter(promo.fin);
 			$('.editPromotionList').append('<option value="'+promo.id+'">'+promo.id+' - Du '+rendate1+' au '+rendate2+' de '+promo.value+' '+promo.type+' dés '+promo.minQuantite+' € d\'achat </option>');
-			}
+			//}
 		}
 		$('.editPromotionList').val(PROMO.id);
 	}
@@ -354,11 +355,6 @@ $('body').on('click','.addProduit .actionB',function(){
 });
 
 $('body').on('change', '.editPromotionList', function(){
-<<<<<<< HEAD
-	//console.log(AllPromos.promotions[($(this).val()-1)].type);
-=======
-	
->>>>>>> 3f90212aa9e462b333dee56f3e412a98b8195106
 	var p = AllPromos.promotions[($(this).val()-1)];
 	if(p){
 		PROMO = p;
